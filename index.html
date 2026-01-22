@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Portfolio - Multi-Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+        font-family: 'Times New Roman';
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            letter-spacing: 3px;
+            color: #d4af37;
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #d4af37;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Home Page */
+        .hero {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/PIC 5.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
+            z-index: 1;
+        }
+
+        .hero > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4em;
+            font-weight: 300;
+            letter-spacing: 10px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #d4af37, #f8f8f8, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.3));
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            letter-spacing: 4px;
+            color: #fff;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero div {
+            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
+        }
+       
+
+        .cta-button {
+            padding: 15px 40px;
+            background: transparent;
+            border: 2px solid #d4af37;
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            display: flex;
+    justify-content: center; /* center all buttons horizontally */
+    gap: 30px; /* space between buttons */
+    margin-top: 30px;
+        }
+
+        .cta-button:hover {
+            background: #d4af37;
+            color: #000;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .page-title {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 6px;
+            color: #d4af37;
+            text-transform: uppercase;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #ccc;
+            margin-bottom: 60px;
+            letter-spacing: 2px;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.5s, filter 0.3s;
+            filter: brightness(1.05) contrast(1.05);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.02);
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            font-size: 1.2em;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.9em;
+            color: #ccc;
+        }
+
+        /* Project Details */
+        .project-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .project-header h2 {
+            font-size: 2.5em;
+            color: #d4af37;
+            margin-bottom: 15px;
+            letter-spacing: 4px;
+        }
+
+        .project-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 0.9em;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 1.2em;
+            color: #d4af37;
+            letter-spacing: 1px;
+        }
+
+        /* About Page */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+    width: 100%;
+    aspect-ratio: 3/4;
+    border-radius: 15px;
+    
+    /* Background: gradient + image */
+    background-image: 
+        linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(139, 115, 85, 0.3) 100%),
+        url('images/PIC 5.jpeg');
+    background-size: cover;        /* fills the container */
+    background-position: center;   /* centers the image */
+    background-repeat: no-repeat;  /* prevents tiling */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+        .about-text h3 {
+            font-size: 2em;
+            color: #d4af37;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+
+        .about-text p {
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+    /* Contact Cards */
+    .contact-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+    }
+
+    .contact-card {
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 40px 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        width: 100%;
+        max-width: 400px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+
+    .contact-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #fff;
+    }
+
+    .contact-card p a {
+        font-size: 1.2rem;
+        color: #ffd700;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .contact-card p a:hover {
+        color: #ffa500;
+    }
+
+    @media(min-width: 768px) {
+        .contact-cards {
+            flex-direction: row;
+            justify-content: center;
+        }
+    }
+
+    /* Footer */
+    .site-footer {
+        background-color: #222;
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
+        font-size: 0.9rem;
+        margin-top: auto;
+    }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            margin-top: 60px;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .footer p {
+            color: #999;
+            letter-spacing: 2px;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 3px;
+            background: #d4af37;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+                letter-spacing: 5px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        /* Image upload placeholder */
+        .upload-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            color: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Portfolio</div>
+            <div class="mobile-menu-btn" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a onclick="showPage('home')" class="active">Home</a></li>
+                <li><a onclick="showPage('portfolio')">Portfolio</a></li>
+                <li><a onclick="showPage('about')">About</a></li>
+                <li><a onclick="showPage('contact')">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <div class="hero">
+            <h1>Elegance Redefined</h1>
+            <p>Where Beauty Meets Authenticity</p>
+            <div style="max-width: 700px; margin: 30px auto; line-height: 1.8; color: #e0e0e0; font-size: 1.1em;">
+                Bringing brands to life through captivating storytelling and authentic representation. From high-fashion editorials to lifestyle campaigns, I create visual narratives that resonate and inspire.
+            </div>
+            <a href="#" onclick="showPage('portfolio')" class="cta-button">Explore My Work</a>
+             <a href="#" onclick="showPage('about')" class="cta-button">Learn About Me</a>
+        </div>
+    </div>
+
+    <!-- Portfolio Gallery Page -->
+    <div id="portfolio" class="page">
+        <div class="container">
+            <h1 class="page-title">My Work</h1>
+            <p class="page-subtitle">Commercial Modeling Portfolio</p>
+
+            
+        <!-- Project 1 Section -->
+        <div class="project-header">
+            <h2>Kitaustudios Photography</h2>
+            <p style="color: #ccc; margin-top: 10px; letter-spacing: 2px;">Essy Collections Clothing</p>
+            <div class="project-info">
+                <div class="info-item">
+                    <div class="info-label">Role</div>
+                    <div class="info-value">Commercial Model</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Category</div>
+                    <div class="info-value">Fashion</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Client</div>
+                    <div class="info-value">Essy Collections</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FIXED: Valid ID + Ready for images -->
+        <div class="gallery-grid" id="kitauGallery">
+    <div class="gallery-item">
+        <img src="images/RHODA/KITA3269.jpg" alt="Kitaustudios Image 1">
+        <div class="gallery-overlay">
+            <p>Kitaustudios Collection</p>
+        </div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="images/RHODA/KITA3277.jpg" alt="Kitaustudios Image 2">
+        <div class="gallery-overlay">
+            <p>Kitaustudios Collection</p>
+        </div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="images/RHODA/KITA3290.jpg" alt="Kitaustudios Image 3">
+        <div class="gallery-overlay">
+            <p>Kitaustudios Collection</p>
+        </div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="images/RHODA/KITA3305.jpg" alt="Kitaustudios Image 4">
+        <div class="gallery-overlay">
+            <p>Kitaustudios Collection</p>
+        </div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="images/RHODA/KITA3306.jpg" alt="Kitaustudios Image 5">
+        <div class="gallery-overlay">
+            <p>Kitaustudios Collection</p>
+        </div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="images/RHODA/KITA3308.jpg" alt="Kitaustudios Image 6">
+        <div class="gallery-overlay">
+            <p>Kitaustudios Collection</p>
+        </div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="images/RHODA/KITA3309.jpg" alt="Kitaustudios Image 7">
+        <div class="gallery-overlay">
+            <p>Kitaustudios Collection</p>
+        </div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="images/RHODA/KITA3315.jpg" alt="Kitaustudios Image 8">
+        <div class="gallery-overlay">
+            <p>Kitaustudios Collection</p>
+        </div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="images/RHODA/KITA3329.jpg" alt="Kitaustudios Image 9">
+        <div class="gallery-overlay">
+            <p>Kitaustudios Collection</p>
+        </div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="images/RHODA/KITA3332.jpg" alt="Kitaustudios Image 10">
+        <div class="gallery-overlay">
+            <p>Kitaustudios Collection</p>
+        </div>
+    </div>
+</div>
+
+            <!-- Project 2 Section -->
+            <div class="project-header" style="margin-top: 80px;">
+                <h2>Edwinjoe Photography</h2>
+                <p style="color: #ccc; margin-top: 10px; letter-spacing: 2px;">Beauty Quest Spa</p>
+                <div class="project-info">
+                    <div class="info-item">
+                        <div class="info-label">Role</div>
+                        <div class="info-value">Commercial Model</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Category</div>
+                        <div class="info-value">Beauty & Wellness</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Client</div>
+                        <div class="info-value">Beauty Quest Spa</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-grid" id="spaGallery">
+                <!-- Images will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- Project 2: Edwinjoe -->
+    <div id="project2" class="page">
+        <div class="container">
+            <div class="project-header">
+                <h2>Edwinjoe Photography</h2>
+                <p style="color: #ccc; margin-top: 10px; letter-spacing: 2px;">Beauty Quest Spa - Detailed View</p>
+                <div class="project-info">
+                    <div class="info-item">
+                        <div class="info-label">Role</div>
+                        <div class="info-value">Commercial Model</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Category</div>
+                        <div class="info-value">Beauty & Wellness</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Client</div>
+                        <div class="info-value">Beauty Quest Spa</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-grid" id="spaGalleryDetailed">
+                <!-- Images will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page">
+        <div class="container">
+            <h1 class="page-title">About Me</h1>
+            <p class="page-subtitle">Professional Commercial Model</p>
+            
+            <div class="about-content">
+                <div class="about-image"></div>
+                <div class="about-text">
+                    <h3>Beyond The Lens</h3>
+                    <p>Every campaign tells a story, and I'm passionate about bringing those stories to life. As a commercial model, I don't just wear the clothes or feature the products—I embody the vision, the emotion, and the message that brands want to share with the world.</p>
+                    <p>My journey in modeling has taken me from elegant fashion shoots with Essy Collections to serene wellness campaigns with Beauty Quest Spa. Each project is an opportunity to connect, inspire, and create something beautiful that resonates with audiences across diverse platforms.</p>
+                    <p>I believe in authenticity, professionalism, and the power of visual storytelling. Whether it's capturing the confidence of a fashion moment or the tranquility of a spa experience, I bring energy, dedication, and a genuine love for what I do to every shoot.</p>
+                    <p style="margin-top: 30px; color: #d4af37; font-style: italic;">"Modeling isn't just about looking good—it's about making people feel something."</p>
+                </div>
+            </div>
+        </div>
+        <a href="#" onclick="showPage('contact')" class="cta-button">Contact Me</a>
+    </div>
+
+    <!-- Contact Page -->
+   <div id="contact" class="page">
+    <div class="container">
+        <h1 class="page-title">Get In Touch</h1>
+        <p class="page-subtitle">Let's work together</p>
+
+        <div class="contact-cards">
+            <div class="contact-card">
+                <h3>Phone</h3>
+                <p><a href="tel:+254707070457">+254707070457</a></p>
+            </div>
+            <div class="contact-card">
+                <h3>Email</h3>
+                <p><a href="mailto:mbururhoda01@gmail.com">mbururhoda01@gmail.com</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2026 Model Portfolio. All Rights Reserved.</p>
+    </div>
+
+    <script>
+        // Spa images data
+        const spaImages = [
+            { title: 'Spa Reception', filename: 'images/PIC 1.jpeg' },
+            { title: 'Client Consultation', filename: 'images/PIC 2.jpeg' },
+            { title: 'Spa Experience', filename: 'images/PIC 3.jpeg' },
+            { title: 'Wellness Moment', filename: 'images/PIC 4.jpeg' },
+            { title: 'Elegant Portrait', filename: 'images/PIC 5.jpeg' },
+            { title: 'Radiant Smile', filename: 'images/PIC 6.jpeg' },
+            { title: 'Professional Service', filename: 'images/PIC 7.jpeg' },
+            { title: 'Outdoor Relaxation', filename: 'images/PIC 8.jpeg' },
+            { title: 'Wellness Together', filename: 'images/PIC 9.jpeg' },
+            { title: 'Lounge Experience', filename: 'images/PIC 10.jpeg' },
+            { title: 'Pure Joy', filename: 'images/PIC 11.jpeg' }
+        ];
+
+        // Kitaustudios Photography images
+    const kitauImages = [
+        { title: 'Fashion Look 1', filename: 'images/RHODA/KITA3269.jpg' },
+        { title: 'Fashion Look 2', filename: 'images/kitau2.jpeg' },
+        { title: 'Fashion Look 3', filename: 'images/kitau3.jpeg' },
+        { title: 'Fashion Look 4', filename: 'images/kitau4.jpeg' },
+        { title: 'Fashion Look 5', filename: 'images/kitau5.jpeg' },
+        { title: 'Fashion Look 6', filename: 'images/kitau6.jpeg' }
+    ];
+
+        // Load spa images
+        function loadSpaImages() {
+            const gallery = document.getElementById('spaGallery');
+            const galleryDetailed = document.getElementById('spaGalleryDetailed');
+
+            spaImages.forEach(image => {
+                const galleryItem = `
+                    <div class="gallery-item">
+                        <img src="${image.filename}" alt="Beauty Quest Spa - ${image.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="upload-placeholder" style="display:none;">✨</div>
+                        <div class="gallery-overlay">
+                            <h3>${image.title}</h3>
+                            <p>Beauty Quest Spa</p>
+                        </div>
+                    </div>
+                `;
+                
+                gallery.innerHTML += galleryItem;
+                galleryDetailed.innerHTML += galleryItem;
+            });
+        }
+
+         // Load Kitaustudios images
+    function loadKitauImages() {
+        const kitauGallery = document.getElementById('kitauGallery');
+        if (!kitauGallery) return;
+
+        kitauImages.forEach(image => {
+            const galleryItem = `
+                <div class="gallery-item">
+                    <img src="${image.filename}" alt="Kitaustudios - ${image.title}" 
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="upload-placeholder" style="display:none;">📸</div>
+                    <div class="gallery-overlay">
+                        <h3>${image.title}</h3>
+                        <p>Kitaustudios Collection</p>
+                    </div>
+                </div>
+            `;
+            
+            kitauGallery.innerHTML += galleryItem;
+        });
+    }
+
+        // Load images when page loads
+        window.addEventListener('load', loadSpaImages);
+
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active nav link
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Close mobile menu
+            document.getElementById('navMenu').classList.remove('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
