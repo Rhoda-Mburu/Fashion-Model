@@ -11,8 +11,12 @@
             box-sizing: border-box;
         }
 
+        button, input, textarea, select {
+            font-family: inherit;
+        }
+
         body {
-        font-family: 'Times New Roman';
+        font-family: 'Times New Roman', Times, serif;
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             color: #fff;
             overflow-x: hidden;
@@ -332,6 +336,7 @@
     .contact-cards {
         display: flex;
         flex-direction: column;
+        flex-wrap: wrap;
         gap: 30px;
         align-items: center;
     }
@@ -373,14 +378,38 @@
     @media(min-width: 768px) {
         .contact-cards {
             flex-direction: row;
+            flex-wrap: wrap;
             justify-content: center;
         }
     }
-        /* Follow me section — force new line */
+        /* Follow me section: force new line */
 .contact-social {
     flex: 0 0 100%;
     margin-top: 20px;
-    text-align: center; /* optional */
+    text-align: center;
+    color: #fff;
+}
+
+.contact-social p {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.contact-social a {
+    color: #ffd700;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.contact-social a:hover {
+    color: #ffa500;
+    text-decoration: underline;
+}
+
+.contact-social .social-divider {
+    color: rgba(255, 215, 0, 0.5);
+    margin: 0 10px;
 }
 
     /* Footer */
@@ -665,10 +694,10 @@
                 <div class="about-image"></div>
                 <div class="about-text">
                     <h3>Beyond The Lens</h3>
-                    <p>Every campaign tells a story, and I'm passionate about bringing those stories to life. As a commercial model, I don't just wear the clothes or feature the products—I embody the vision, the emotion, and the message that brands want to share with the world.</p>
+                    <p>Every campaign tells a story, and I'm passionate about bringing those stories to life. As a commercial model, I don't just wear the clothes or feature the products, I embody the vision, the emotion, and the message that brands want to share with the world.</p>
                     <p>My journey in modeling has taken me from elegant fashion shoots with Essy Collections to serene wellness campaigns with Beauty Quest Spa. Each project is an opportunity to connect, inspire, and create something beautiful that resonates with audiences across diverse platforms.</p>
                     <p>I believe in authenticity, professionalism, and the power of visual storytelling. Whether it's capturing the confidence of a fashion moment or the tranquility of a spa experience, I bring energy, dedication, and a genuine love for what I do to every shoot.</p>
-                    <p style="margin-top: 30px; color: #d4af37; font-style: italic;">"Modeling isn't just about looking good—it's about making people feel something."</p>
+                    <p style="margin-top: 30px; color: #d4af37; font-style: italic;">"Modeling isn't just about looking good, it's about making people feel something."</p>
                 </div>
             </div>
         </div>
@@ -676,6 +705,10 @@
     </div>
 
     <!-- Contact Page -->
+    <div id="contact" class="page">
+      <div class="container">
+        <h1 class="page-title">Contact Me</h1>
+        <p class="page-subtitle">Let's Work Together</p>
   <div class="contact-cards">
     <div class="contact-card">
         <h3>Phone</h3>
@@ -694,13 +727,15 @@
             <a href="https://www.instagram.com/rhoda_shantel?igsh=MXczdXQ0aDlqeXZscQ==" target="_blank" rel="noopener noreferrer">
                 Instagram
             </a>
-            |
+            <span class="social-divider">|</span>
             <a href="https://youtube.com/@rhodashantel23?si=8rRdQMCtexGB6cBs" target="_blank" rel="noopener noreferrer">
                 YouTube
             </a>
         </p>
     </div>
 </div>
+      </div>
+    </div>
 
     <!-- Footer -->
     <div class="footer">
