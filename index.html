@@ -529,70 +529,70 @@
         <!-- FIXED: Valid ID + Ready for images -->
         <div class="gallery-grid" id="kitauGallery">
     <div class="gallery-item">
-        <img src="images/RHODA/KITA3269.jpg" alt="Kitaustudios Image 1">
+        <img src="images/RHODA/KITA3269.jpg" alt="Kitaustudios Image 1" loading="lazy" decoding="async">
         <div class="gallery-overlay">
             <p>Kitaustudios Collection</p>
         </div>
     </div>
 
     <div class="gallery-item">
-        <img src="images/RHODA/KITA3277.jpg" alt="Kitaustudios Image 2">
+        <img src="images/RHODA/KITA3277.jpg" alt="Kitaustudios Image 2" loading="lazy" decoding="async">
         <div class="gallery-overlay">
             <p>Kitaustudios Collection</p>
         </div>
     </div>
 
     <div class="gallery-item">
-        <img src="images/RHODA/KITA3290.jpg" alt="Kitaustudios Image 3">
+        <img src="images/RHODA/KITA3290.jpg" alt="Kitaustudios Image 3" loading="lazy" decoding="async">
         <div class="gallery-overlay">
             <p>Kitaustudios Collection</p>
         </div>
     </div>
 
     <div class="gallery-item">
-        <img src="images/RHODA/KITA3305.jpg" alt="Kitaustudios Image 4">
+        <img src="images/RHODA/KITA3305.jpg" alt="Kitaustudios Image 4" loading="lazy" decoding="async">
         <div class="gallery-overlay">
             <p>Kitaustudios Collection</p>
         </div>
     </div>
 
     <div class="gallery-item">
-        <img src="images/RHODA/KITA3306.jpg" alt="Kitaustudios Image 5">
+        <img src="images/RHODA/KITA3306.jpg" alt="Kitaustudios Image 5" loading="lazy" decoding="async">
         <div class="gallery-overlay">
             <p>Kitaustudios Collection</p>
         </div>
     </div>
 
     <div class="gallery-item">
-        <img src="images/RHODA/KITA3308.jpg" alt="Kitaustudios Image 6">
+        <img src="images/RHODA/KITA3308.jpg" alt="Kitaustudios Image 6" loading="lazy" decoding="async">
         <div class="gallery-overlay">
             <p>Kitaustudios Collection</p>
         </div>
     </div>
 
     <div class="gallery-item">
-        <img src="images/RHODA/KITA3309.jpg" alt="Kitaustudios Image 7">
+        <img src="images/RHODA/KITA3309.jpg" alt="Kitaustudios Image 7" loading="lazy" decoding="async">
         <div class="gallery-overlay">
             <p>Kitaustudios Collection</p>
         </div>
     </div>
 
     <div class="gallery-item">
-        <img src="images/RHODA/KITA3315.jpg" alt="Kitaustudios Image 8">
+        <img src="images/RHODA/KITA3315.jpg" alt="Kitaustudios Image 8" loading="lazy" decoding="async">
         <div class="gallery-overlay">
             <p>Kitaustudios Collection</p>
         </div>
     </div>
 
     <div class="gallery-item">
-        <img src="images/RHODA/KITA3329.jpg" alt="Kitaustudios Image 9">
+        <img src="images/RHODA/KITA3329.jpg" alt="Kitaustudios Image 9" loading="lazy" decoding="async">
         <div class="gallery-overlay">
             <p>Kitaustudios Collection</p>
         </div>
     </div>
 
     <div class="gallery-item">
-        <img src="images/RHODA/KITA3332.jpg" alt="Kitaustudios Image 10">
+        <img src="images/RHODA/KITA3332.jpg" alt="Kitaustudios Image 10" loading="lazy" decoding="async">
         <div class="gallery-overlay">
             <p>Kitaustudios Collection</p>
         </div>
@@ -741,7 +741,7 @@
             spaImages.forEach(image => {
                 const galleryItem = `
                     <div class="gallery-item">
-                        <img src="${image.filename}" alt="Beauty Quest Spa - ${image.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <img src="${image.filename}" loading="lazy" decoding="async" alt="Beauty Quest Spa - ${image.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="upload-placeholder" style="display:none;">✨</div>
                         <div class="gallery-overlay">
                             <h3>${image.title}</h3>
@@ -763,7 +763,7 @@
         kitauImages.forEach(image => {
             const galleryItem = `
                 <div class="gallery-item">
-                    <img src="${image.filename}" alt="Kitaustudios - ${image.title}" 
+                    <img src="${image.filename}" loading="lazy" decoding="async" alt="Kitaustudios - ${image.title}" 
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="upload-placeholder" style="display:none;">📸</div>
                     <div class="gallery-overlay">
